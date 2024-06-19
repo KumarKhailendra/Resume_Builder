@@ -1,0 +1,224 @@
+.r-body{ 
+	margin: 0;
+	padding: 0;
+  height: 100vh;
+  width: 100vw;
+	background: url(https://res.cloudinary.com/dn9vn1yuj/image/upload/v1718025884/builder-desktop-banner_olcoug.webp);
+	/* background-image: var(--background-image); */
+	background-size: cover;
+	background-position: center;
+	font-family: sans-serif;
+}
+.login-box{
+	width: 320px;
+	height: 420px;
+	background-color: #ede7f640;
+	color: #fff !important;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+.login-box1{
+	width: 650px;
+	height: 520px;
+	background-color: #ede7f640;
+	color: #fff !important;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+.login-box3{
+	width: 320px;
+	height: 320px;
+	background-color: #ede7f640;
+	color: #fff !important;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+.login-box4{
+	width: 320px;
+	height: 365px;
+	background-color: #ede7f640;
+	color: #fff !important;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+}
+.avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
+	top: -50px;
+	left: calc(50% - 50px);
+
+}
+.r-body .login-box .h1,
+.r-body .login-box1 .h1,
+.r-body .login-box4 h1
+{
+	margin: 0;
+  color: #F1F8FF !important;
+	padding: 0 0 10px;
+	text-align: center;
+	font-size: 22px;
+}
+.r-body .login-box .p,
+.r-body .login-box1 .p,
+.r-body .login-box4 p
+{
+	margin: 0;
+	padding: 0;
+  color: #F1F8FF !important;
+	font-weight: bold;
+}
+
+
+.r-body .login-box input,
+.r-body .login-box1 input,
+.r-body .login-box4 input
+{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.r-body .login-box input[type="text"],
+.r-body .login-box input[type="password"],
+.r-body .login-box input[type="email"],
+.r-body .login-box1 input[type="text"],
+.r-body .login-box1 input[type="password"],
+.r-body .login-box1 input[type="email"],
+.r-body .login-box4 input[type="text"],
+.r-body .login-box4 input[type="password"],
+.r-body .login-box4 input[type="email"]
+{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+}
+.r-body .login-box1 input[type="email"]
+{
+	width: 49%;
+}
+
+.r-body .login-box input[type="submit"],
+.r-body .login-box1 input[type="submit"],
+.r-body .login-box4 input[type="submit"]
+{
+	border: none;
+	outline: none;
+	height: 40px;
+	background: #1c8adb;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 20px;
+	width: 100%;
+}
+.r-body .login-box input[type="submit"]:hover,
+.r-body .login-box4 input[type="submit"]:hover,
+.r-body .login-box1 input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #39dc79;
+	color: 000;
+}
+
+.r-body .login-box .a,
+.r-body .login-box4 a
+{
+	text-decoration: none;
+	font-size: 14px;
+	color: #fff;
+}
+.r-body .login-box1 .p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+.r-body .login-box input,.r-body .login-box select,
+.r-body .login-box1 input,.r-body .login-box1 select
+{
+	/* width: 100%; */
+	margin-bottom: 7px;
+}
+
+.r-body .login-box1 input[type="text"],
+.r-body .login-box1 input[type="password"],
+.r-body .login-box1 select
+{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+	width: 49%;
+}
+.r-body .login-box1 select option{
+	color: black;
+}
+.r-body .sign-up
+{
+	border: none;
+	margin-top: 20px;
+	outline: none;
+	height: 40px;
+	background: #1c8adb;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 20px;
+}
+.r-body .sign-up:hover
+{
+	cursor: pointer;
+
+	background: #39dc79;
+	color: 000;
+}
+
+.r-body .sign-in{
+	text-decoration: none;
+	font-size: 14px;
+	color: #ff98f3 !important;
+}
+
+.r-body .login-box1 .row1{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.r-body .login-box1 select:required:invalid {
+	color: gray;
+}
+.r-body .login-box1 option[value=""][disabled] {
+	display: none;
+}
+
+
+.position-relative{
+	position: relative;
+}
+.position-absolute{
+	position: absolute;
+}
+.text-secondary {
+    color: #6c757d; 
+}

@@ -1,0 +1,119 @@
+.website-features.section {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    width: 100%;
+}
+
+.grid-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(1120px + 88px);
+    padding-left: 44px;
+    padding-right: 44px;
+    width: 100%;
+}
+
+.website-features__title {
+    margin: 0 auto 70px;
+    max-width: 736px;
+    text-align: center;
+    color: rgba(5, 5, 5, 0.744);
+}
+
+.website-features__title.section__title {
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 20px;
+}
+
+.website-features__list {
+    grid-gap: 64px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(296px, 1fr));
+    justify-items: center;
+}
+
+.website-features__item {
+    align-items: flex-start;
+    display: flex;
+    margin-bottom: 32px;
+}
+
+.website-features__image {
+    background-size: cover;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+@supports (display:grid) {
+    .website-features__item {
+        margin-bottom: 0;
+    }
+}
+
+.website-features__image {
+    background-color: #eff2f9;
+    flex: 0 0 56px;
+    height: 56px;
+    margin-right: 8px;
+    width: 56px;
+}
+
+.website-features__image--builder {
+    background-position: 0 0;
+}
+
+.website-features__image--writing {
+    background-position: -448px 0;
+}
+
+.website-features__image.is-image-loaded {
+    background-color: initial;
+    border-radius: 0;
+}
+
+.website-features__image--ok-hand {
+    background-position: -224px 0;
+}
+
+.website-features__image--grammar {
+    background-position: -112px 0;
+}
+
+.website-features__image--templates {
+    background-position: -336px 0;
+}
+
+.website-features__image--job-tracking {
+    background-position: -168px 0;
+}
+
+.website-features__image--security {
+    background-position: -280px 0;
+}
+
+.website-features__image--word {
+    background-position: -392px 0;
+}
+
+.website-features__image--cover-letter {
+    background-position: -56px 0;
+}
+
+.website-features__item-content {
+    padding: 10px;
+}
+
+.website-features__label {
+    color: #282b8f;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 4px;
+}
+
+.website-features__text {
+    font-size: 14px;
+    color: #555;
+}

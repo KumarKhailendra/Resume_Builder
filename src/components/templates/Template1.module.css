@@ -1,0 +1,87 @@
+.template {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+  font-family: var(--body-font);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2em;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.header p {
+  font-size: 1em;
+  color: var(--text-color);
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.section p {
+  font-size: 1em;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.item {
+  margin-bottom: 10px;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item h3 {
+  font-size: 1.2em;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.item p {
+  font-size: 1em;
+  color: var(--text-color);
+  margin: 5px 0 0 0;
+}
+
+.date {
+  font-size: 0.9em;
+  color: var(--secondary-color);
+  margin: 0;
+}
+
+.skillsList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skillItem {
+  font-size: 1em;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px;
+  color: var(--text-color);
+}
