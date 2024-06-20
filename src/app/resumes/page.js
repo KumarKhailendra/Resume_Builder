@@ -1,26 +1,35 @@
-'use client';
-import { useState } from 'react';
-import axios from 'axios';
-import { templates } from '@/data/templates';
-import dynamic from 'next/dynamic';
-import styles from '@/style/Dashboard.module.css';
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
-import { TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled } from 'react-icons/tb';
+"use client";
+import { useState } from "react";
+import axios from "axios";
+import { templates } from "@/data/templates";
+import dynamic from "next/dynamic";
+import styles from "@/style/Dashboard.module.css";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
+import {
+  TbLayoutSidebarLeftCollapseFilled,
+  TbLayoutSidebarRightCollapseFilled,
+} from "react-icons/tb";
 import { BiSolidContact } from "react-icons/bi";
 import { FaAddressCard } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { GrProjects, GrUserWorker } from "react-icons/gr";
 import { SiCoursera, SiMinds } from "react-icons/si";
-import { IoMdSchool } from 'react-icons/io';
-import PersonalDetailsForm from '@/components/ResumeSections/PersonalDetailsForm';
+import { IoMdSchool } from "react-icons/io";
+import PersonalDetailsForm from "@/components/ResumeSections/PersonalDetailsForm";
+import ExperienceDetailsForm from "@/components/ResumeSections/ExperienceDetailsForm";
+import EducationDetailsForm from "@/components/ResumeSections/EducationDetailsForm";
+import SkillsDetailsForm from "@/components/ResumeSections/SkillsDetailsForm";
+import ProjectsDetailsForm from "@/components/ResumeSections/ProjectsDetailsForm";
+import CoursesDetailsForm from "@/components/ResumeSections/CoursesDetailsForm";
 
 export default function Resumes() {
   const [collapsed, setCollapsed] = useState(false);
+  const [openResumeDetaile, setOpenResumeDetaile] = useState(0);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [formData, setFormData] = useState({
     contact: {},
@@ -40,7 +49,7 @@ export default function Resumes() {
   const handleChange = (section, e) => {
     const { name, value } = e.target;
     if (Array.isArray(formData[section])) {
-      const index = e.target.getAttribute('data-index');
+      const index = e.target.getAttribute("data-index");
       const newItems = [...formData[section]];
       newItems[index] = { ...newItems[index], [name]: value };
       setFormData({
@@ -73,32 +82,26 @@ export default function Resumes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/resume', { template: selectedTemplate, data: formData });
-      alert('Resume saved successfully');
+      await axios.post("/api/resume", {
+        template: selectedTemplate,
+        data: formData,
+      });
+      alert("Resume saved successfully");
     } catch (err) {
-      alert('Error saving resume');
+      alert("Error saving resume");
     }
   };
 
-  const DynamicTemplate = selectedTemplate ? dynamic(() => import(`@/components/templates/${selectedTemplate.component}`)) : null;
+  const DynamicTemplate = selectedTemplate
+    ? dynamic(() =>
+        import(`@/components/templates/${selectedTemplate.component}`)
+      )
+    : null;
 
   return (
     <div style={{ display: "flex", height: "100vh", minHeight: "400px" }}>
-    <Sidebar collapsed={collapsed} roostyle={{height: "100vh", minHeight: "400px" }}>
-        <Menu>
-          <MenuItem onClick={() => setCollapsed(!collapsed)} icon={collapsed? <TbLayoutSidebarRightCollapseFilled  /> : <TbLayoutSidebarLeftCollapseFilled />}> collapse</MenuItem>
-          <MenuItem icon={<FaAddressCard  />} > Personal Details</MenuItem>
-          <MenuItem icon={<GrUserWorker  />}> Experience</MenuItem>
-          <MenuItem icon={<IoMdSchool  />}> Education</MenuItem>
-          <MenuItem icon={<SiMinds  />}> Skills</MenuItem>
-          <MenuItem icon={<GrProjects  />}> Projects</MenuItem>
-          <MenuItem icon={<SiCoursera  />}> Courses</MenuItem>
-        </Menu>
-      </Sidebar>
-    <div className={styles.container}>
-      {
-        !selectedTemplate && (
-          <>
+        {!selectedTemplate && (
+          <div className={styles.container}>
             <h1>Select a Resume Template</h1>
             <Swiper
               pagination={{ clickable: true }}
@@ -120,17 +123,25 @@ export default function Resumes() {
             >
               {templates.map((template) => (
                 <SwiperSlide key={template.id}>
-                  <div className={styles.templateCard} onClick={() => handleSelectTemplate(template)}>
-                    <Image src={template.image} alt={template.name} width={100} height={150} style={{width:"100%", height: "100%"}} />
+                  <div
+                    className={styles.templateCard}
+                    onClick={() => handleSelectTemplate(template)}
+                  >
+                    <Image
+                      src={template.image}
+                      alt={template.name}
+                      width={100}
+                      height={150}
+                      style={{ width: "100%", height: "100%" }}
+                    />
                     <p>{template.name}</p>
                   </div>
                 </SwiperSlide>
               ))}
             </Swiper>
-          </>
-        )
-      }
-      {/* {selectedTemplate && (
+          </div>
+        )}
+        {/* {selectedTemplate && (
         <div className={styles.editorContainer}>
           <form className={styles.form} onSubmit={handleSubmit}>
             <h2>Editing: {selectedTemplate.name}</h2>
@@ -211,12 +222,68 @@ export default function Resumes() {
           </div>
         </div>
       )} */}
-      {
-        selectedTemplate && (
-          <PersonalDetailsForm />
-        )
-      }
-    </div>
+        {selectedTemplate && (
+          <div style={{ display: "flex", height: "100vh", minHeight: "400px" }}>
+            <Sidebar
+              collapsed={collapsed}
+              roostyle={{ height: "100vh", minHeight: "400px" }}
+            >
+              <Menu>
+                <MenuItem
+                  onClick={() => setCollapsed(!collapsed)}
+                  icon={
+                    collapsed ? (
+                      <TbLayoutSidebarRightCollapseFilled />
+                    ) : (
+                      <TbLayoutSidebarLeftCollapseFilled />
+                    )
+                  }
+                >
+                  {" "}
+                  collapse
+                </MenuItem>
+                <MenuItem icon={<FaAddressCard />} active={openResumeDetaile===0? true: false} onClick={()=>setOpenResumeDetaile(0)}> Personal Details</MenuItem>
+                <MenuItem icon={<GrUserWorker />} onClick={()=>setOpenResumeDetaile(1)}> Experience</MenuItem>
+                <MenuItem icon={<IoMdSchool />} onClick={()=>setOpenResumeDetaile(2)}> Education</MenuItem>
+                <MenuItem icon={<SiMinds />} onClick={()=>setOpenResumeDetaile(3)}> Skills</MenuItem>
+                <MenuItem icon={<GrProjects />} onClick={()=>setOpenResumeDetaile(4)}> Projects</MenuItem>
+                <MenuItem icon={<SiCoursera />} onClick={()=>setOpenResumeDetaile(5)}> Courses</MenuItem>
+              </Menu>
+            </Sidebar>
+            <div className={styles.container}>
+            {
+              openResumeDetaile === 0 && (
+                <PersonalDetailsForm />
+              )
+            }
+            {
+              openResumeDetaile === 1 && (
+                <ExperienceDetailsForm />
+              )
+            }
+            {
+              openResumeDetaile === 2 && (
+                <EducationDetailsForm />
+              )
+            }
+            {
+              openResumeDetaile === 3 && (
+                <SkillsDetailsForm />
+              )
+            }
+            {
+              openResumeDetaile === 4 && (
+                <ProjectsDetailsForm />
+              )
+            }
+            {
+              openResumeDetaile === 5 && (
+                <CoursesDetailsForm />
+              )
+            }
+            </div>
+          </div>
+        )}
     </div>
   );
 }

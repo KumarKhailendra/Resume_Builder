@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Grid } from '@mui/material';
 import { useAppDispatch } from '@/redux/hooks';
-import { PersonalDetailsAction } from '@/redux/actions/resumeAction';
+import { ProjectsDetailsAction } from '@/redux/actions/resumeAction';
 
-export default function PersonalDetailsForm() {
+export default function ProjectsDetailsForm() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    professionalTitle: '',
-    email: '',
-    phone: '',
-    address: '',
-    website: '',
-    profile: ''
+    projectTitle: '',
+    subTitle: '',
+    startDate: '',
+    endDate: '',
+    description: ''
   });
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +24,7 @@ export default function PersonalDetailsForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(PersonalDetailsAction(formData))
+    dispatch(ProjectsDetailsAction(formData));
     console.log('Form Data Submitted:', formData);
   };
 
@@ -34,87 +32,72 @@ export default function PersonalDetailsForm() {
     <Container maxWidth="md">
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4, p: 3, boxShadow: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Typography variant="h4" component="h2" gutterBottom align="center">
-          Personal Details
+          Projects Details
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Full Name"
-              name="fullName"
-              value={formData.fullName}
+              label="Project Title"
+              name="projectTitle"
+              value={formData.projectTitle}
               onChange={handleChange}
               margin="normal"
               required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Professional Title"
-              name="professionalTitle"
-              value={formData.professionalTitle}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Email Address"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Phone Number"
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Personal Website"
-              type="url"
-              name="website"
-              value={formData.website}
-              onChange={handleChange}
-              margin="normal"
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="Profile"
-              name="profile"
-              value={formData.profile}
+              label="Sub Title"
+              name="subTitle"
+              value={formData.subTitle}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Start Date"
+              type="date"
+              name="startDate"
+              value={formData.startDate}
+              onChange={handleChange}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="End Date"
+              type="date"
+              name="endDate"
+              value={formData.endDate}
+              onChange={handleChange}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Description"
+              name="description"
+              value={formData.description}
               onChange={handleChange}
               margin="normal"
               multiline
               rows={4}
+              required
             />
           </Grid>
         </Grid>
@@ -125,7 +108,7 @@ export default function PersonalDetailsForm() {
           fullWidth
           sx={{ mt: 2 }}
         >
-          Save Next
+          Submit
         </Button>
       </Box>
     </Container>
