@@ -15,7 +15,7 @@ export const PersonalDetailsAction = (data) => async (dispatch) => {
     }
 }
 
-export const ExprienceDetailsAction = (data) => async (dispatch) => {
+export const ExperienceDetailsAction = (data) => async (dispatch) => {
     try {
         dispatch({ 
             type: GLOBALTYPES.RESUME_EXPRIENCE_DETAILS, 
@@ -43,7 +43,7 @@ export const EducationDetailsAction = (data) => async (dispatch) => {
     }
 }
 
-export const SkilsDetailsAction = (data) => async (dispatch) => {
+export const SkillsDetailsAction = (data) => async (dispatch) => {
     try {
         dispatch({ 
             type: GLOBALTYPES.RESUME_SKILS_DETAILS, 

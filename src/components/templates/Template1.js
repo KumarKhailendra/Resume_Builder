@@ -5,8 +5,8 @@ import styles from './Template1.module.css';
 const Template1 = ({ data }) => (
   <div className={styles.template}>
     <header className={styles.header}>
-      <h1>{data.personal.name}</h1>
-      <p>{data.contact.email} | {data.contact.phone}</p>
+      <h1>{data.personal.fullName}</h1>
+      <p>{data.personal.email} | {data.personal.phone}</p>
       <p>{data.personal.address}</p>
     </header>
     {

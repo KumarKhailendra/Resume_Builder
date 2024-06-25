@@ -3,6 +3,7 @@ import "../style/globals.css";
 import DataProvider from "@/redux/store";
 import { Toaster } from "react-hot-toast";
 import SideBar from "@/components/SideBar";
+import MUIThemeProvider from "./muiThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
         <DataProvider>
-          <SideBar>{children}</SideBar>
+          <MUIThemeProvider>
+            <SideBar>{children}</SideBar>
+          </MUIThemeProvider>
         </DataProvider>
         <Toaster />
       </body>

@@ -2,11 +2,11 @@ import { GLOBALTYPES } from "../actions/globalTypes";
 
 const initialState = {
   personal: {},
-  exprience: {},
-  education: {},
-  skils: [],
-  projects: {},
-  courses: {},
+  experience: [],
+  education: [],
+  skills: [],
+  projects: [],
+  courses: [],
 };
 
 const ResumeReducer = (state = initialState, action) => {
@@ -22,39 +22,39 @@ const ResumeReducer = (state = initialState, action) => {
     case GLOBALTYPES.RESUME_EXPRIENCE_DETAILS:
       return {
         ...state,
-        exprience: {
-          ...state.exprience,
+        experience: [
+          ...state.experience,
           ...action.payload.data,
-        },
+        ],
       };
     case GLOBALTYPES.RESUME_EDUCATION_DETAILS:
       return {
         ...state,
-        education: {
+        education: [
           ...state.education,
           ...action.payload.data,
-        },
+        ],
       };
     case GLOBALTYPES.RESUME_SKILS_DETAILS:
       return {
         ...state,
-        skils: [...state.skils, ...action.payload.data],
+        skills: [...state.skills, ...action.payload.data],
       };
     case GLOBALTYPES.RESUME_PROJECT_DETAILS:
       return {
         ...state,
-        projects: {
+        projects: [
           ...state.projects,
           ...action.payload.data,
-        },
+        ],
       };
     case GLOBALTYPES.RESUME_COURSES_DETAILS:
       return {
         ...state,
-        courses: {
+        courses: [
           ...state.courses,
           ...action.payload.data,
-        },
+        ],
       };
     default:
       return state;

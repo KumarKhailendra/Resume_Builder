@@ -28,7 +28,7 @@ const Template2 = ({ data }) => {
           pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
         }
-        pdf.save(`${data.personal?.name}_resume.pdf`);
+        pdf.save(`${data?.personal?.email}_resume.pdf`);
       });
   };
 
@@ -39,7 +39,7 @@ const Template2 = ({ data }) => {
           new Paragraph({
             children: [
               new TextRun({
-                text: data.personal?.name || 'N/A',
+                text: data.personal?.fullName || 'N/A',
                 bold: true,
                 size: 32,
                 color: "333333",
@@ -48,14 +48,14 @@ const Template2 = ({ data }) => {
             alignment: "center",
           }),
           new Paragraph({
-            text: `${data.contact?.email || 'N/A'} | ${data.contact?.phone || 'N/A'}`,
+            text: `${data.personal?.email || 'N/A'} | ${data.contact?.phone || 'N/A'}`,
             alignment: "center",
           }),
           new Paragraph({
             text: "Profile",
             heading: "Heading2",
           }),
-          new Paragraph(data.profile?.summary || 'N/A'),
+          new Paragraph(data.personal?.profile || 'N/A'),
           new Paragraph({
             text: "Experience",
             heading: "Heading2",
@@ -135,23 +135,24 @@ const Template2 = ({ data }) => {
     <div>
       <div className={styles.template} id="resume-content">
         <header className={styles.header}>
-          <h1>{data.personal?.name || 'Your Name'}</h1>
-          <p>{data.contact?.email || 'Your Email'} | {data.contact?.phone || 'Your Phone'}</p>
+          <h1>{data.personal?.fullName || 'Your Name'}</h1>
+          <h3>{data.personal?.professionalTitle}</h3>
+          <p>{data.personal?.email || 'Your Email'} | {data.personal?.phone || 'Your Phone'}</p>
         </header>
         <section className={styles.section}>
           <h2>Profile</h2>
-          <p>{data.profile?.summary || 'Your profile summary...'}</p>
+          <p>{data.personal?.profile || 'Your profile summary...'}</p>
         </section>
         <section className={styles.section}>
           <h2>Experience</h2>
           {data.experience?.map((exp, index) => (
             <div key={index} className={styles.item}>
               <div className={styles.itemHeader}>
-                <h3>{exp.jobTitle || 'Job Title'}</h3>
+                <h3>{exp.designation || 'Job Title'}</h3>
                 <p className={styles.date}>{exp.startDate || 'Start Date'} - {exp.endDate || 'End Date'}</p>
               </div>
-              <p>{exp.company || 'Company Name'}</p>
-              <p>{exp.description || 'Job Description'}</p>
+              <p>{exp.companyName || 'Company Name'}</p>
+              <p>{exp.workDescription || 'Job Description'}</p>
             </div>
           )) || <p>No experience added.</p>}
         </section>
@@ -163,8 +164,8 @@ const Template2 = ({ data }) => {
                 <h3>{edu.degree || 'Degree'}</h3>
                 <p className={styles.date}>{edu.startDate || 'Start Date'} - {edu.endDate || 'End Date'}</p>
               </div>
-              <p>{edu.institution || 'Institution Name'}</p>
-              <p>{edu.year || 'Year'}</p>
+              <p>{edu.college || 'Institution Name'}</p>
+              <p>{edu.description || 'Description'}</p>
             </div>
           )) || <p>No education added.</p>}
         </section>
@@ -181,8 +182,8 @@ const Template2 = ({ data }) => {
           {data.projects?.map((project, index) => (
             <div key={index} className={styles.item}>
               <div className={styles.itemHeader}>
-                <h3>{project.title || 'Project Title'}</h3>
-                <p className={styles.date}>{project.date || 'Date'}</p>
+                <h3>{project.projectTitle || 'Project Title'}</h3>
+                <p className={styles.date}>{project.startDate || 'Start Date'} - {project.endDate || 'End Date'}</p>
               </div>
               <p>{project.description || 'Project Description'}</p>
             </div>
@@ -193,8 +194,8 @@ const Template2 = ({ data }) => {
           {data.courses?.map((course, index) => (
             <div key={index} className={styles.item}>
               <div className={styles.itemHeader}>
-                <h3>{course.course || 'Course'}</h3>
-                <p className={styles.date}>{course.date || 'Date'}</p>
+                <h3>{course.courseTitle || 'Course'}</h3>
+                <p className={styles.date}>{course.startDate || 'Start Date'} - {course.endDate || 'End Date'}</p>
               </div>
               <p>{course.institution || 'Institution Name'}</p>
             </div>

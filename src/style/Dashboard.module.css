@@ -1,6 +1,6 @@
 
 .container {
-  padding: 20px;
+  padding: 0 20px;
   width: 100%;
   margin: 0 auto;
   background-color: var(--background-color);
@@ -92,7 +92,7 @@
 
 .preview {
   flex: 2;
-  margin: 20px 0;
+  /* margin: 20px 0; */
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;

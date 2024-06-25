@@ -3,7 +3,7 @@ import { Container, TextField, Button, Typography, Box, Grid } from '@mui/materi
 import { useAppDispatch } from '@/redux/hooks';
 import { PersonalDetailsAction } from '@/redux/actions/resumeAction';
 
-export default function PersonalDetailsForm() {
+export default function PersonalDetailsForm({setOpenResumeDetaile}) {
   const [formData, setFormData] = useState({
     fullName: '',
     professionalTitle: '',
@@ -27,7 +27,7 @@ export default function PersonalDetailsForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(PersonalDetailsAction(formData))
-    console.log('Form Data Submitted:', formData);
+    setOpenResumeDetaile(1)
   };
 
   return (
