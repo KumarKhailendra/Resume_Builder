@@ -12,5 +12,11 @@ export const templates = [
       image: '/images/single_column_resume_template_2_120817dd43.png',
       component: 'Template2',
     },
+    {
+      id: 3,
+      name: 'Template 3',
+      image: '/images/single_column_resume_template_2_120817dd43.png',
+      component: 'Template3',
+    },
   ];
   

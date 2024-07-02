@@ -14,11 +14,12 @@ import {
   Stack,
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add'; 
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { CoursesDetailsAction } from "@/redux/actions/resumeAction";
 
 export default function CoursesDetailsForm({setOpenResumeDetaile}) {
-  const [courses, setCourses] = useState([]);
+  const {resume} = useAppSelector((state)=>state)
+  const [courses, setCourses] = useState(resume?.courses || []);
   const [formData, setFormData] = useState({
     courseTitle: "",
     institution: "",

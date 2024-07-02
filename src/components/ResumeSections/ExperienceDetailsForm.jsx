@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Grid, Card, CardContent, Stack } from '@mui/material';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { ExperienceDetailsAction } from '@/redux/actions/resumeAction';
 
 export default function ExperienceDetailsForm({setOpenResumeDetaile}) {
-  const [experiences, setExperiences] = useState([]);
+  const {experience} = useAppSelector((state)=>state.resume)
+
+  const [experiences, setExperiences] = useState(experience || []);
   const [formData, setFormData] = useState({
     designation: '',
     companyName: '',

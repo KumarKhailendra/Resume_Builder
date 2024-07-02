@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Grid, Card, CardContent, Stack } from '@mui/material';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { EducationDetailsAction } from '@/redux/actions/resumeAction';
 
 export default function EducationDetailsForm({setOpenResumeDetaile}) {
-  const [educations, setEducations] = useState([]);
+  const {education} = useAppSelector((state)=>state.resume)
+  const [educations, setEducations] = useState(education || []);
   const [formData, setFormData] = useState({
     degree: '',
     college: '',

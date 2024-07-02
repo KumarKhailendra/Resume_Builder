@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Grid, MenuItem, Select, InputLabel, FormControl, Card, CardContent, Stack } from '@mui/material';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { SkillsDetailsAction } from '@/redux/actions/resumeAction';
 
 export default function SkillsDetailsForm({setOpenResumeDetaile}) {
-  const [skills, setSkills] = useState([]);
+  const {resume} = useAppSelector((state)=>state)
+  const [skills, setSkills] = useState(resume?.skills || []);
   const [formData, setFormData] = useState({
     skill: '',
     information: '',

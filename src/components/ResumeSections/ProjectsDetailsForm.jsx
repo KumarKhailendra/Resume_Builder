@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Grid, Card, CardContent, Stack } from '@mui/material';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { ProjectsDetailsAction } from '@/redux/actions/resumeAction';
 
 export default function ProjectsDetailsForm({setOpenResumeDetaile}) {
-  const [projects, setProjects] = useState([]);
+  const {resume} = useAppSelector((state)=>state)
+  const [projects, setProjects] = useState(resume?.projects || []);
   const [formData, setFormData] = useState({
     projectTitle: '',
     subTitle: '',

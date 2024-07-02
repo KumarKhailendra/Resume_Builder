@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Grid } from '@mui/material';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { PersonalDetailsAction } from '@/redux/actions/resumeAction';
 
 export default function PersonalDetailsForm({setOpenResumeDetaile}) {
+  const {personal} = useAppSelector((state)=>state.resume)
   const [formData, setFormData] = useState({
-    fullName: '',
-    professionalTitle: '',
-    email: '',
-    phone: '',
-    address: '',
-    website: '',
-    profile: ''
+    fullName: personal?.fullName || '',
+    professionalTitle: personal?.professionalTitle || '',
+    email: personal?.email || '',
+    phone: personal?.phone || '',
+    address: personal?.address || '',
+    website: personal?.website || '',
+    profile: personal?.profile || '',
   });
 
   const dispatch = useAppDispatch()
