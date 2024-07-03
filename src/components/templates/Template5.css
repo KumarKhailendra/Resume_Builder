@@ -1,0 +1,107 @@
+.template-3-main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.template-3-resume-container {
+    display: flex;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    width: 800px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.template-3-left-column {
+    width: 35%;
+    background-color: #f7f9fc;
+    padding: 20px;
+    text-align: center;
+}
+
+.template-3-right-column {
+    width: 65%;
+    padding: 20px;
+    background-color: #d9e7f0;
+}
+
+.template-3-profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.template-3-left-column h2 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.template-3-job-title {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.template-3-section {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.template-3-section h3 {
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.template-3-right-column-heading{
+    background-color: #fff;
+}
+
+.template-3-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.template-3-section ul li {
+    padding: 5px 0;
+}
+
+.template-3-right-column .template-3-section h4 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+}
+
+.template-3-right-column .template-3-section p {
+    font-size: 14px;
+    color: #777;
+    margin: 5px 0;
+}
+
+.template-3-right-column .template-3-section ul li {
+    font-size: 14px;
+    color: #777;
+}
+
+.download-section {
+    margin-top: 20px;
+}
+
+.downloadpdf-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.downloadpdf-btn:hover {
+    background-color: #0056b3;
+}

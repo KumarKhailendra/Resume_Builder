@@ -28,6 +28,19 @@ export const ExperienceDetailsAction = (data) => async (dispatch) => {
         // showFailureToaster(err.response.data.msg)
     }
 }
+export const VolunteersDetailsAction = (data) => async (dispatch) => {
+    try {
+        dispatch({ 
+            type: GLOBALTYPES.RESUME_VOLUNTEERS_DETAILS, 
+            payload: {
+                data
+            } 
+        })
+    } catch (err) {
+        console.log(err);
+        // showFailureToaster(err.response.data.msg)
+    }
+}
 
 export const EducationDetailsAction = (data) => async (dispatch) => {
     try {
@@ -47,6 +60,34 @@ export const SkillsDetailsAction = (data) => async (dispatch) => {
     try {
         dispatch({ 
             type: GLOBALTYPES.RESUME_SKILS_DETAILS, 
+            payload: {
+                data
+            } 
+        })
+    } catch (err) {
+        console.log(err);
+        // showFailureToaster(err.response.data.msg)
+    }
+}
+
+export const LanguagesDetailsAction = (data) => async (dispatch) => {
+    try {
+        dispatch({ 
+            type: GLOBALTYPES.RESUME_LANGUAGES_DETAILS, 
+            payload: {
+                data
+            } 
+        })
+    } catch (err) {
+        console.log(err);
+        // showFailureToaster(err.response.data.msg)
+    }
+}
+
+export const InterestsDetailsAction = (data) => async (dispatch) => {
+    try {
+        dispatch({ 
+            type: GLOBALTYPES.RESUME_INTERESTS_DETAILS, 
             payload: {
                 data
             } 

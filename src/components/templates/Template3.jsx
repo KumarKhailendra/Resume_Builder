@@ -26,7 +26,7 @@ const Template3 = ({ data }) => {
                         <div className="left-content">
                             <div className="profile-details">
                                 <div className="profile-image">
-                                    <Avatar {...stringAvatar(data.personal?.fullName)} alt="Profile" sx={{width: "100%", height: "100%", objectFit: "fill"}}  />
+                                    <Avatar {...stringAvatar(data.personal?.fullName? data.personal?.fullName : "Unknown Persone")} alt="Profile" sx={{width: "100%", height: "100%", objectFit: "fill"}}  />
                                 </div>
                                 <div className="name">{data.personal?.fullName}</div>
                                 <div className="description">{data.personal?.professionalTitle}</div>

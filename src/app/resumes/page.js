@@ -5,9 +5,11 @@ import dynamic from "next/dynamic";
 import styles from "@/style/Dashboard.module.css";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import PersonalDetailsForm from "@/components/ResumeSections/PersonalDetailsForm";
 import ExperienceDetailsForm from "@/components/ResumeSections/ExperienceDetailsForm";
 import EducationDetailsForm from "@/components/ResumeSections/EducationDetailsForm";
@@ -15,7 +17,10 @@ import SkillsDetailsForm from "@/components/ResumeSections/SkillsDetailsForm";
 import ProjectsDetailsForm from "@/components/ResumeSections/ProjectsDetailsForm";
 import CoursesDetailsForm from "@/components/ResumeSections/CoursesDetailsForm";
 import { useAppSelector } from "@/redux/hooks";
-import { Box, Button, Step, StepButton, Stepper, Typography } from "@mui/material";
+import { Box, Button, Step, StepButton, Stepper } from "@mui/material";
+import LanguagesDetailsForm from "@/components/ResumeSections/LanguagesDetailsForm";
+import VolunteersDetailsForm from "@/components/ResumeSections/VolunteersDetailsForm";
+import InterestsDetailsForm from "@/components/ResumeSections/InterestsDetailsForm";
 
 const steps = [
   "Personal Details",
@@ -24,93 +29,64 @@ const steps = [
   "Skills",
   "Projects",
   "Courses",
+  "Languages",
+  "Volunteers",
+  "Interests",
 ];
 
 export default function Resumes() {
-  const [openResumeDetaile, setOpenResumeDetaile] = useState(0);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState({});
   const { resume } = useAppSelector((state) => state);
 
-  const totalSteps = () => {
-    return steps.length;
-  };
+  const totalSteps = () => steps.length;
+  const completedSteps = () => Object.keys(completed).length;
+  const isLastStep = () => activeStep === totalSteps() - 1;
+  const allStepsCompleted = () => completedSteps() === totalSteps();
 
-  const completedSteps = () => {
-    return Object.keys(completed).length;
-  };
-
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
-
-  const allStepsCompleted = () => {
-    return completedSteps() === totalSteps();
-  };
-  
   const handleNext = () => {
-    const newActiveStep =
-      isLastStep() && !allStepsCompleted()
-        ? steps.findIndex((step, i) => !(i in completed))
-        : activeStep + 1;
+    const newActiveStep = isLastStep() && !allStepsCompleted()
+      ? steps.findIndex((step, i) => !(i in completed))
+      : activeStep + 1;
     setActiveStep(newActiveStep);
   };
-  
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
-  const handleSelectTemplate = (template) => {
-    setSelectedTemplate(template);
-  };
+  const handleBack = () => setActiveStep(prevActiveStep => prevActiveStep - 1);
 
-  const handleStep = (step) => () => {
-    completedSteps()
-    setActiveStep(step);
-  };
+  const handleSelectTemplate = (template) => setSelectedTemplate(template);
+
+  const handleStep = (step) => () => setActiveStep(step);
 
   const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
+    setCompleted({ ...completed, [activeStep]: true });
     handleNext();
   };
 
   const DynamicTemplate = selectedTemplate
-    ? dynamic(() =>
-        import(`@/components/templates/${selectedTemplate.component}`)
-      )
+    ? dynamic(() => import(`@/components/templates/${selectedTemplate.component}`))
     : null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        minHeight: "400px",
-        width: "100%",
-      }}
-    >
-      {!selectedTemplate && (
-        <div className={styles.container}>
+    <div style={{ display: "flex", height: "100vh", width: "100%" }}>
+      {!selectedTemplate ? (
+        <div className={styles.container_slider}>
           <h1>Select a Resume Template</h1>
           <Swiper
-            pagination={{ clickable: true }}
-            spaceBetween={50}
-            slidesPerView={3}
-            modules={[Pagination]}
-            breakpoints={{
-              1024: {
-                slidesPerView: 3,
-              },
-              600: {
-                slidesPerView: 2,
-              },
-              480: {
-                slidesPerView: 1,
-              },
+            effect="coverflow"
+            grabCursor
+            centeredSlides
+            loop
+            slidesPerView="auto"
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
             }}
+            pagination={{ clickable: true }}
+            navigation
+            modules={[EffectCoverflow, Pagination, Navigation]}
             className={styles.templateSelection}
           >
             {templates.map((template) => (
@@ -124,7 +100,8 @@ export default function Resumes() {
                     alt={template.name}
                     width={100}
                     height={150}
-                    style={{ width: "100%", height: "100%" }}
+                    layout="responsive"
+                    className={styles.swiper_slide}
                   />
                   <p>{template.name}</p>
                 </div>
@@ -132,10 +109,8 @@ export default function Resumes() {
             ))}
           </Swiper>
         </div>
-      )}
-      {selectedTemplate && (
-        <div style={{ display: "flex", height: "100vh", minHeight: "400px", width: "100%" }}>
-          <div className={styles.container}>
+      ) : (
+        <div className={styles.container}>
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((label, index) => (
               <Step key={label} completed={completed[index]}>
@@ -145,59 +120,34 @@ export default function Resumes() {
               </Step>
             ))}
           </Stepper>
-          <React.Fragment>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              {activeStep !== 6 && (
-              <Button onClick={handleComplete} sx={{ mr: 1 }}>
-                Next
-              </Button>
-            )}
-                <Button onClick={()=> setActiveStep(6)}>
-                  preview
-                </Button>
-            </Box>
-          </React.Fragment>
-            {activeStep === 0 && (
-              <PersonalDetailsForm
-                setOpenResumeDetaile={setActiveStep}
-              />
-            )}
-            {activeStep === 1 && (
-              <ExperienceDetailsForm
-                setOpenResumeDetaile={setActiveStep}
-              />
-            )}
-            {activeStep === 2 && (
-              <EducationDetailsForm
-                setOpenResumeDetaile={setActiveStep}
-              />
-            )}
-            {activeStep === 3 && (
-              <SkillsDetailsForm setOpenResumeDetaile={setActiveStep} />
-            )}
-            {activeStep === 4 && (
-              <ProjectsDetailsForm
-                setOpenResumeDetaile={setActiveStep}
-              />
-            )}
-            {activeStep === 5 && (
-              <CoursesDetailsForm setOpenResumeDetaile={setActiveStep} />
-            )}
-            {activeStep === 6 && (
-              <div className={styles.preview}>
-                {selectedTemplate && <DynamicTemplate data={resume} />}
-              </div>
-            )}
-          </div>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
+            </Button>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Button onClick={handleComplete} sx={{ mr: 1 }}>
+              {isLastStep() ? "Finish" : "Next"}
+            </Button>
+          </Box>
+          {activeStep === 0 && <PersonalDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 1 && <ExperienceDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 2 && <EducationDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 3 && <SkillsDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 4 && <ProjectsDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 5 && <CoursesDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 6 && <LanguagesDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 7 && <VolunteersDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 8 && <InterestsDetailsForm setOpenResumeDetaile={handleComplete} />}
+          {activeStep === 9 && (
+            <div className={styles.preview}>
+              {selectedTemplate && <DynamicTemplate data={resume} />}
+            </div>
+          )}
         </div>
       )}
     </div>

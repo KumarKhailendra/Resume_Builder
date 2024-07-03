@@ -7,6 +7,9 @@ const initialState = {
   skills: [],
   projects: [],
   courses: [],
+  languages: [],
+  interests: [],
+  volunteers: []
 };
 
 const ResumeReducer = (state = initialState, action) => {
@@ -27,6 +30,14 @@ const ResumeReducer = (state = initialState, action) => {
           ...action.payload.data,
         ],
       };
+    case GLOBALTYPES.RESUME_VOLUNTEERS_DETAILS:
+      return {
+        ...state,
+        volunteers: [
+          ...state.volunteers,
+          ...action.payload.data,
+        ],
+      };
     case GLOBALTYPES.RESUME_EDUCATION_DETAILS:
       return {
         ...state,
@@ -39,6 +50,16 @@ const ResumeReducer = (state = initialState, action) => {
       return {
         ...state,
         skills: [...state.skills, ...action.payload.data],
+      };
+    case GLOBALTYPES.RESUME_LANGUAGES_DETAILS:
+      return {
+        ...state,
+        languages: [...state.languages, ...action.payload.data],
+      };
+    case GLOBALTYPES.RESUME_INTERESTS_DETAILS:
+      return {
+        ...state,
+        interests: [...state.interests, ...action.payload.data],
       };
     case GLOBALTYPES.RESUME_PROJECT_DETAILS:
       return {
